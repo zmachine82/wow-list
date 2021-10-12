@@ -1,0 +1,24 @@
+.icon {
+  color: green;
+  font-size: xx-large;
+}
+
+
+
+
+button {
+ margin-left: 16px;
+}
+
+
+.add-todo {
+  justify-content: center;
+  background-color: lightgray;
+  cursor: pointer;
+ }
+
+
+
+ li {
+  height: 75px;
+}

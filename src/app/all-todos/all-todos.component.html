@@ -1,0 +1,18 @@
+<div class="container">
+  <ul class="list-group">
+    <li
+      *ngFor="let todo of todos"
+      class="list-group-item flex"
+      [ngClass]="{ completed: todo.completed }">
+      <div class="form-check flex" style="height: 100%">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [(ngModel)]="todo.completed"
+        />
+      </div>
+      <span>{{ todo.task }}</span>
+    </li>
+    <app-add-todo (updated)="refreshTodos()"></app-add-todo>
+  </ul>
+</div>

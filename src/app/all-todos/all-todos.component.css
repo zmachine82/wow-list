@@ -1,0 +1,17 @@
+.completed {
+  text-decoration: line-through;
+  color: lightgray;
+}
+
+
+span {
+  margin-left: 24px;
+}
+
+ li {
+   height: 75px;
+ }
+
+
+
+

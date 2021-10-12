@@ -1,0 +1,20 @@
+<ul class="list-group ">
+  <li class="list-group-item flex add-todo"  (click)="flipAddingATodo()">
+    <i *ngIf="!addingATodo" class="bi bi-plus-square icon"></i>
+    <div *ngIf="addingATodo" class="flex">
+      <input class="form-control" [(ngModel)]="newTodoTask" />
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="width: 45%"
+        (click)="addTodo($event)"
+        (window:keyup.enter)="addTodo()"
+      >
+        Add Todo
+      </button>
+      <button type="button" class="btn btn-danger" (click)="cancel($event)">
+        Cancel
+      </button>
+    </div>
+  </li>
+</ul>
