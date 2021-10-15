@@ -8,13 +8,15 @@ import { FormsModule } from '@angular/forms';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
+import { ListSidebarComponent } from './list-sidebar/list-sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AllTodosComponent,
     AddTodoComponent,
-    HeaderComponent
+    HeaderComponent,
+    ListSidebarComponent
   ],
   imports: [
     BrowserModule,

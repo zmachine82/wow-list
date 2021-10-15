@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Todo } from '../model/todo.model';
-import { TodoStateService } from '../services/todo-state.service';
+import { ListService } from '../services/list.service';
 
 @Component({
   selector: 'app-add-todo',
@@ -12,25 +12,21 @@ export class AddTodoComponent implements OnInit {
   addingATodo = false;
   newTodoTask = '';
 
-  @Output() updated = new EventEmitter<void>();
-
-  constructor(private todoStateService: TodoStateService) { }
+  constructor(private listService: ListService) { }
 
   ngOnInit(): void {
   }
 
   addTodo(event?: MouseEvent) {
-    this.todoStateService.addTodo(new Todo(this.newTodoTask));
+    this.listService.addTodoToList(new Todo(this.newTodoTask));
     this.newTodoTask = '';
     this.addingATodo = false;
     event?.stopPropagation();
-    this.updated.emit()
   }
 
   cancel(event: MouseEvent) {
     event.stopPropagation();
     this.addingATodo = false;
-    this.updated.emit()
   }
 
   flipAddingATodo() {

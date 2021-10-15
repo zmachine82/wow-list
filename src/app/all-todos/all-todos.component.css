@@ -12,6 +12,13 @@ span {
    height: 75px;
  }
 
+.icons {
+  display: none;
+}
 
+li:hover .icons {
+  display: flex;
+  font-size: larger;
+}
 
 

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { List } from '../model/list.model';
 import { Todo } from '../model/todo.model';
-import { TodoStateService } from '../services/todo-state.service';
+import { ListService } from '../services/list.service';
 
 @Component({
   selector: 'app-all-todos',
@@ -8,16 +9,14 @@ import { TodoStateService } from '../services/todo-state.service';
   styleUrls: ['./all-todos.component.css']
 })
 export class AllTodosComponent implements OnInit {
-  todos: Todo[] = [];
-
-  constructor(private todoStateService: TodoStateService) { }
+  constructor(public listService: ListService) { }
 
   ngOnInit(): void {
-    this.refreshTodos();
+
   }
 
-  refreshTodos() {
-    this.todos = this.todoStateService.getAllTodos();
+  removeTodo(todo: Todo) {
+    this.listService.removeTodoToList(todo)
   }
 
 }
