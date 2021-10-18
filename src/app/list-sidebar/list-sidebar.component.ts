@@ -16,7 +16,10 @@ export class ListSidebarComponent implements OnInit {
   constructor(private listService: ListService) { }
 
   ngOnInit(): void {
-    this.userLists = this.listService.getAllLists();
+    this.listService.allLists.subscribe(allLists => {
+      this.userLists = allLists;
+
+    })
   }
 
   selectList(list: List) {
@@ -25,8 +28,7 @@ export class ListSidebarComponent implements OnInit {
 
   addList() {
     this.listService.addList(new List(this.newListName, []));
-    this.newListName= '';
-    this.userLists = this.listService.getAllLists();
+    this.newListName = '';
   }
 
 }

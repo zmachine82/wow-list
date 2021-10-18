@@ -22,17 +22,4 @@ export class LocalStorageService {
     return [];
   }
 
-  updateList(list: List) {
-    const updatedLists = this.loadLists().map(l => {
-      if(l.name === list.name) {
-        return list
-      }
-      return l;
-
-    })
-
-    this.saveLists(updatedLists);
-  }
-
-
 }

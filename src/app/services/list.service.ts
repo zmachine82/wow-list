@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ListMocker } from '../mocks/MoskList';
 import { List } from '../model/list.model';
 import { Todo } from '../model/todo.model';
@@ -8,41 +10,47 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class ListService {
-  private userLists: List[] = [
-    ListMocker.fakeList(),
-    ListMocker.fakeList(),
-    ListMocker.fakeList(),
-    ListMocker.fakeList(),
-    ListMocker.fakeList(),
-  ];
 
-  selectedList!: List;
+  // @ts-ignore
+  selectedList: BehaviorSubject<List> = new BehaviorSubject<List>(undefined);
+
+  allLists: BehaviorSubject<List[]> = new BehaviorSubject<List[]>([]);
 
   constructor(private localStorageService: LocalStorageService) {
-
+    this.getAllLists();
+    this.allLists.pipe(tap(updatedList => {
+      this.localStorageService.saveLists(updatedList)
+    })).subscribe(() => {})
   }
 
   getAllLists() {
-    return this.localStorageService.loadLists();
+    this.allLists.next(this.localStorageService.loadLists());
   }
 
   selectList(list: List) {
-    this.selectedList = list;
+    this.selectedList.next(list);
   }
 
   addList(list: List) {
-    const currentLists = this.localStorageService.loadLists();
-    currentLists.push(list);
-    this.localStorageService.saveLists(currentLists);
+    const newList = this.allLists.getValue();
+    newList.push(list)
+    this.allLists.next(newList);
+  }
+
+  updateList(list: List) {
+    const listsNotUpdated = this.allLists.getValue().filter(l => l.name !== list.name);
+    listsNotUpdated.push(list);
+    this.allLists.next(listsNotUpdated)
   }
 
   addTodoToList(todo: Todo) {
-    this.selectedList.todos.push(todo);
-    this.localStorageService.updateList(this.selectedList);
+    this.selectedList.getValue().todos.push(todo);
+    this.updateList(this.selectedList.getValue())
   }
 
   removeTodoToList(todo: Todo) {
-    this.selectedList.todos = this.selectedList.todos.filter(t => t !== todo);
-    this.localStorageService.updateList(this.selectedList);
+    this.selectedList.getValue().todos = this.selectedList.getValue().todos.filter(t => t !== todo);
+    this.updateList(this.selectedList.getValue())
   }
 }
+

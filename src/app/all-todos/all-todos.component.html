@@ -1,8 +1,8 @@
 <div class="container">
-  <ul class="list-group" *ngIf="listService.selectedList">
-    <h2>{{listService.selectedList.name}}</h2>
+  <ul class="list-group" *ngIf="selectedList">
+    <h2>{{selectedList.name}}</h2>
     <li
-      *ngFor="let todo of listService.selectedList.todos"
+      *ngFor="let todo of selectedList.todos"
       class="list-group-item flex" style="justify-content: space-between;"
       [ngClass]="{ completed: todo.completed }">
       <div class="flex" >

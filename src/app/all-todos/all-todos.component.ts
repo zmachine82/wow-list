@@ -9,9 +9,15 @@ import { ListService } from '../services/list.service';
   styleUrls: ['./all-todos.component.css']
 })
 export class AllTodosComponent implements OnInit {
-  constructor(public listService: ListService) { }
+
+  selectedList?: List;
+
+  constructor(private listService: ListService) { }
 
   ngOnInit(): void {
+    this.listService.selectedList.subscribe(listUpdated => {
+      this.selectedList = listUpdated;
+    })
 
   }
 
