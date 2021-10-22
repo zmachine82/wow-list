@@ -9,6 +9,9 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { ListSidebarComponent } from './list-sidebar/list-sidebar.component';
+import { LoginComponent } from './login/login.component';
+import { MainComponent } from './main/main.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +19,22 @@ import { ListSidebarComponent } from './list-sidebar/list-sidebar.component';
     AllTodosComponent,
     AddTodoComponent,
     HeaderComponent,
-    ListSidebarComponent
+    ListSidebarComponent,
+    LoginComponent,
+    MainComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     FormsModule,
-    RouterModule.forRoot([])
+    RouterModule.forRoot([
+      {path: 'login', component: LoginComponent},
+      {path: 'sign-up', component: SignUpComponent},
+      {path: '', component: MainComponent},
+
+
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

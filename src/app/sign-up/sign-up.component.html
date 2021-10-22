@@ -1,0 +1,29 @@
+<div class="wrapper" >
+    <form  #signupForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="exampleInputEmail1">First Name</label>
+        <input name="firstName" type="text" class="form-control" aria-describedby="emailHelp" placeholder="First Name"   required #firstName="ngModel" ngModel>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Last Name</label>
+        <input name="lastName" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Last Name"   required #lastName="ngModel" ngModel>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input name="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email"  email #email="ngModel" ngModel required>
+        <span *ngIf="!email.valid && email.touched">This field is invalid!</span>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input name="password" type="password" class="form-control" #firstPassword="ngModel" required [(ngModel)]="request.password">
+        <span *ngIf="!firstPassword.valid && firstPassword.touched">This password is invalid!</span>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Confirm Password</label>
+        <input name="passwordConfirmation" type="password" class="form-control" #passwordConfirm="ngModel" required [(ngModel)]="request.passwordConfirmation">
+        <span *ngIf="!passwordConfirm.valid && passwordConfirm.touched">This password is invalid!</span>
+        <span *ngIf="checkConfirmation()">Password doesn't match.</span>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid || checkConfirmation()">Submit</button>
+    </form>
+</div>
