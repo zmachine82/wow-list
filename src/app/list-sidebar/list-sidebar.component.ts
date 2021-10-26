@@ -9,6 +9,7 @@ import { ListService } from '../services/list.service';
 })
 export class ListSidebarComponent implements OnInit {
 
+
   userLists: List[] = [];
 
   newListName = '';
@@ -31,4 +32,7 @@ export class ListSidebarComponent implements OnInit {
     this.newListName = '';
   }
 
-}
+
+
+  }
+

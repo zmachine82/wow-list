@@ -12,6 +12,7 @@ import { ListSidebarComponent } from './list-sidebar/list-sidebar.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { PipesPipe } from './pipes/pipes.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     ListSidebarComponent,
     LoginComponent,
     MainComponent,
-    SignUpComponent
+    SignUpComponent,
+    PipesPipe
   ],
   imports: [
     BrowserModule,

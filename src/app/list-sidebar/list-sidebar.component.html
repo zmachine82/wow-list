@@ -1,22 +1,23 @@
-<div style="margin-left: 16px;">
+<div style="margin-left: 16px">
   <h1>My Lists</h1>
   <div class="buttons">
     <button class="btn btn-primary" (click)="addList()">Add List</button>
-    <div class="form-check flex"  >
+    <div class="form-check flex">
       <input class="form-control" [(ngModel)]="newListName" />
     </div>
   </div>
   <li
-      *ngFor="let list of userLists"
-      class="list-group-item flex" style="justify-content: space-between;"
-      (click)="selectList(list)"
-      >
-      <div class="flex" >
-        <span>{{ list.name }}</span>
-      </div>
-      <!-- <div class="icons">
+    *ngFor="let list of userLists"
+    class="list-group-item flex"
+    style="justify-content: space-between"
+    (click)="selectList(list)"
+  >
+    <div class="flex">
+      <span>{{ list.name | pipes }}</span>
+    </div>
+    <!-- <div class="icons">
         <button class="btn btn-danger" (click)="removeTodo(list)"><i class="bi bi-trash" style="color: white;"></i></button>
 
       </div> -->
-    </li>
+  </li>
 </div>

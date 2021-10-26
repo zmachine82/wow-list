@@ -2,7 +2,7 @@
   <ul class="list-group" *ngIf="selectedList">
     <h2>{{selectedList.name}}</h2>
     <li
-      *ngFor="let todo of selectedList.todos"
+      *ngFor="let todo of selectedList.todos "
       class="list-group-item flex" style="justify-content: space-between;"
       [ngClass]="{ completed: todo.completed }">
       <div class="flex" >
@@ -13,7 +13,7 @@
           [(ngModel)]="todo.completed"
           />
         </div>
-        <span>{{ todo.task }}</span>
+        <span>{{ todo.task | pipes:'right' }}</span>
       </div>
       <div class="icons">
         <button class="btn btn-danger" (click)="removeTodo(todo)"><i class="bi bi-trash" style="color: white;"></i></button>
