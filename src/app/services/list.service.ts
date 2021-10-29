@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ListMocker } from '../mocks/MoskList';
 import { List } from '../model/list.model';
 import { Todo } from '../model/todo.model';
 import { LocalStorageService } from './local-storage.service';
+import { TodoService } from './todo.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,29 +13,29 @@ import { LocalStorageService } from './local-storage.service';
 export class ListService {
 
   // @ts-ignore
-  selectedList: BehaviorSubject<List> = new BehaviorSubject<List>(undefined);
+  selectedList: BehaviorSubject<List> = new BehaviorSubject<List>();
 
   allLists: BehaviorSubject<List[]> = new BehaviorSubject<List[]>([]);
 
-  constructor(private localStorageService: LocalStorageService) {
+  constructor(private todoService: TodoService) {
     this.getAllLists();
-    this.allLists.pipe(tap(updatedList => {
-      this.localStorageService.saveLists(updatedList)
-    })).subscribe(() => {})
   }
 
   getAllLists() {
-    this.allLists.next(this.localStorageService.loadLists());
+    this.todoService.getAllLists().subscribe(data => {
+      this.allLists.next(data)
+    })
   }
 
   selectList(list: List) {
     this.selectedList.next(list);
   }
 
-  addList(list: List) {
-    const newList = this.allLists.getValue();
-    newList.push(list)
-    this.allLists.next(newList);
+  addList(newListName: string) {
+    this.todoService.addList(newListName).subscribe(result => {
+      this.getAllLists();
+    })
+
   }
 
   updateList(list: List) {
@@ -43,14 +44,17 @@ export class ListService {
     this.allLists.next(listsNotUpdated)
   }
 
-  addTodoToList(todo: Todo) {
-    this.selectedList.getValue().todos.push(todo);
-    this.updateList(this.selectedList.getValue())
+  addTodoToList(todoTask: string) {
+    const newTodo = new Todo(undefined, todoTask, false, this.selectedList.getValue().id)
+
+    this.todoService.addTodoToList(newTodo).subscribe(() => {
+      this.selectedList.next(this.selectedList.getValue())
+    });
   }
 
   removeTodoToList(todo: Todo) {
-    this.selectedList.getValue().todos = this.selectedList.getValue().todos.filter(t => t !== todo);
-    this.updateList(this.selectedList.getValue())
+    // this.selectedList.getValue().todos = this.selectedList.getValue().todos.filter(t => t !== todo);
+    // this.updateList(this.selectedList.getValue())
   }
 }
 

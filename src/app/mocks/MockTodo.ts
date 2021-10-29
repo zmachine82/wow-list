@@ -2,9 +2,9 @@ import { Todo } from "../model/todo.model";
 
 export class TodoMocker {
 
-  static fakeTodo(): Todo {
-    return new Todo(randomString())
-  }
+  // static fakeTodo(): Todo {
+  //   return new Todo(randomString())
+  // }
 }
 
 

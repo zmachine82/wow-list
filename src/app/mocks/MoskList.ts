@@ -4,13 +4,7 @@ import { TodoMocker } from "./MockTodo";
 export class ListMocker {
 
   static fakeList(): List {
-    return new List(randomString(), [
-      TodoMocker.fakeTodo(),
-      TodoMocker.fakeTodo(),
-      TodoMocker.fakeTodo(),
-      TodoMocker.fakeTodo(),
-      TodoMocker.fakeTodo(),
-    ])
+    return new List(randomString(), 0)
   }
 }
 

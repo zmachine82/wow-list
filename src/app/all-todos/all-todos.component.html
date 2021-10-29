@@ -2,7 +2,7 @@
   <ul class="list-group" *ngIf="selectedList">
     <h2>{{selectedList.name}}</h2>
     <li
-      *ngFor="let todo of selectedList.todos "
+      *ngFor="let todo of selectedListTodos "
       class="list-group-item flex" style="justify-content: space-between;"
       [ngClass]="{ completed: todo.completed }">
       <div class="flex" >
@@ -11,6 +11,7 @@
           class="form-check-input"
           type="checkbox"
           [(ngModel)]="todo.completed"
+          (ngModelChange)="updateTodoItem(todo)"
           />
         </div>
         <span>{{ todo.task | pipes:'right' }}</span>

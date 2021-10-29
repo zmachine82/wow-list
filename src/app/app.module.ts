@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { PipesPipe } from './pipes/pipes.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,12 +31,11 @@ import { PipesPipe } from './pipes/pipes.pipe';
     BrowserModule,
     NgbModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path: 'login', component: LoginComponent},
       {path: 'sign-up', component: SignUpComponent},
       {path: '', component: MainComponent},
-
-
     ])
   ],
   providers: [],

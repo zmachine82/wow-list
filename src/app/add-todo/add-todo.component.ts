@@ -18,7 +18,7 @@ export class AddTodoComponent implements OnInit {
   }
 
   addTodo(event?: MouseEvent) {
-    this.listService.addTodoToList(new Todo(this.newTodoTask));
+    this.listService.addTodoToList(this.newTodoTask);
     this.newTodoTask = '';
     this.addingATodo = false;
     event?.stopPropagation();

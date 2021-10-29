@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { List } from '../model/list.model';
 import { ListService } from '../services/list.service';
+import { TodoService } from '../services/todo.service';
 
 @Component({
   selector: 'app-list-sidebar',
@@ -21,6 +22,7 @@ export class ListSidebarComponent implements OnInit {
       this.userLists = allLists;
 
     })
+
   }
 
   selectList(list: List) {
@@ -28,7 +30,7 @@ export class ListSidebarComponent implements OnInit {
   }
 
   addList() {
-    this.listService.addList(new List(this.newListName, []));
+    this.listService.addList(this.newListName)
     this.newListName = '';
   }
 
