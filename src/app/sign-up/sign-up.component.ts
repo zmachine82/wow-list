@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { authState } from '@angular/fire/auth';
 import { signupForm } from '../model/sign-up.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,12 +12,15 @@ export class SignUpComponent implements OnInit {
 
 
 request: signupForm = new signupForm()
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+
   }
 checkConfirmation(){
    return this.request.password !== this.request.passwordConfirmation
 }
-onSubmit(){}
+onSubmit(){
+  this.authService.signup(this.request.email, this.request.password);
+}
 }

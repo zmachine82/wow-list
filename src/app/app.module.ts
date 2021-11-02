@@ -14,6 +14,10 @@ import { MainComponent } from './main/main.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { PipesPipe } from './pipes/pipes.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import {  getAuth, provideAuth } from '@angular/fire/auth';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -32,10 +36,12 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     FormsModule,
     HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
     RouterModule.forRoot([
       {path: 'login', component: LoginComponent},
       {path: 'sign-up', component: SignUpComponent},
-      {path: '', component: MainComponent},
+      {path: '', component: MainComponent, canActivate: [AuthGuard]},
     ])
   ],
   providers: [],

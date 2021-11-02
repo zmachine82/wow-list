@@ -10,7 +10,7 @@
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
-        <input name="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email"  email #email="ngModel" ngModel required>
+        <input name="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email"  email #email="ngModel" [(ngModel)]="request.email" required>
         <span *ngIf="!email.valid && email.touched">This field is invalid!</span>
       </div>
       <div class="form-group">
@@ -24,6 +24,6 @@
         <span *ngIf="!passwordConfirm.valid && passwordConfirm.touched">This password is invalid!</span>
         <span *ngIf="checkConfirmation()">Password doesn't match.</span>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid || checkConfirmation()">Submit</button>
+      <button type="submit" class="btn btn-primary"  [disabled]="signupForm.invalid || checkConfirmation()">Submit</button>
     </form>
 </div>
